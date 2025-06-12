@@ -21,6 +21,7 @@ app.listen(3000, () => {
 })
 
 app.post('/contact', (req, res) => {   
+    res.send("request received");
     contactModel.create(req.body).then(
         contact => res.json(contact),console.log("Data inserted!"))
         .catch(err => res.json(err),console.log("Data not inserted!"))
