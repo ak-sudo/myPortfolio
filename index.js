@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const uri = "mongodb+srv://akshat:akshatkala1234@cluster0.lt5t7ny.mongodb.net/PORTFOLIO?retryWrites=true&w=majority&appName=Cluster0";
+const uri = "mongodb+srv://akshat:akshatkala1234@cluster0.lt5t7ny.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 mongoose.connect(uri)
 .then(
@@ -22,7 +22,7 @@ app.listen(3000, () => {
 
 app.post('/contact', (req, res) => {   
     contactModel.create(req.body).then(
-        contact => res.json(contact))
-        .catch(err => res.json(err))
+        contact => res.json(contact),console.log("Data inserted!")
+        .catch(err => res.json(err),console.log("Data not inserted!"))
 }
 ) 
