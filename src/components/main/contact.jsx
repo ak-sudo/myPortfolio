@@ -37,7 +37,7 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://myportfolioo-qxps.onrender.com:3000/contact", { name, email, message })
+      .post("https://myportfolioo-qxps.onrender.com/contact", { name, email, message })
       .then((result) => console.log(result), 
         setInfoState(infoState+1), setTimeout(() => {
         setInfoState(0);
