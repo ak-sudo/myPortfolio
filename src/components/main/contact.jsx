@@ -76,7 +76,7 @@ export default function Contact() {
           </div>
 
           <div className="contactForm">
-            <form onSubmit={handleSubmit} method="post" autoComplete="off">
+            <form onSubmit={handleSubmit} method="post" action="https://myportfolioo-qxps.onrender.com/contact" autoComplete="off">
               <div className="formGroup">
                 <input
                   type="text"
