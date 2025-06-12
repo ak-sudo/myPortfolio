@@ -12,7 +12,7 @@ const uri = "mongodb+srv://akshat:akshatkala1234@cluster0.lt5t7ny.mongodb.net/?r
 
 mongoose.connect(uri)
 .then(
-    console.log('Connected to MongoDB')).catch(err => {
+    console.log('Yay! Connected to MongoDB')).catch(err => {
     console.error('Error connecting to MongoDB:', err);
 }); 
 
