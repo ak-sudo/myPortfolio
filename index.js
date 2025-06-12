@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const uri = "mongodb+srv://akshat:akshatkala1234@cluster0.lt5t7ny.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = "mongodb+srv://akshat:akshatkala1234@cluster0.lt5t7ny.mongodb.net/PORTFOLIO?retryWrites=true&w=majority&appName=Cluster0";
 
 mongoose.connect(uri)
 .then(
