@@ -22,7 +22,7 @@ export default function Contact() {
     return (
       <Alert className="border-red-500 bg-red-900 h-10 w-100vh flex items-center justify-center">
         <AlertDescription>
-          Your conneection request could not be sent. Please try again later!
+          Internal Server Error Occurred. Please try again later!
         </AlertDescription>
       </Alert>
     );
@@ -38,27 +38,35 @@ export default function Contact() {
     e.preventDefault();
     axios
       .post("https://myportfolioo-qxps.onrender.com/contact", { name, email, message })
-      .then((result) => console.log(result), 
-        setInfoState(infoState+1), setTimeout(() => {
-        setInfoState(0);
-      },5000))
-
-      .catch((err) => console.log(err), infoState = 404);
+      .then((result) => {
+        if (result.data && result.data.success) {
+          console.log(result.data)
+          setInfoState(200); // Success
+        } else {
+          setInfoState(404); // Failed
+        }
+        setTimeout(() => setInfoState(0), 5000);
+      })
+      .catch((err) => {
+        setInfoState(err.response?.status || 500); // Failed
+        setTimeout(() => setInfoState(0), 5000);
+      });
   };
 
   function CheckStateAndShow(infoState) {
     if (infoState == 0) {
       return (<div className="dbInfo"></div>);
     }
-    else if (infoState == 1){
+    else if (infoState == 200){
         return (<div className="dbInfo">{Sucess()}</div>);}
-    else if (infoState == 404)
+    else if (infoState == 500)
         return (<><div className="dbInfo">{Failed()}</div></>);
     
   }
   return (
     <>
-      {CheckStateAndShow(infoState)}
+      <div className="InstanceMessage">{CheckStateAndShow(infoState)}</div>
+
       <div className="contact body-font" id="contact">
         <h1 className="backText">Contact</h1>
         <h1 className="frontText">Contact Me</h1>
