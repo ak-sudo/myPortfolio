@@ -1,71 +1,60 @@
 import "./navbar.css";
+import React, { useState, useEffect } from "react";
 
 export default function Navbar() {
-    function callNav() {
-        const slideNav = document.querySelector(".slideNavHidden");
-        slideNav.classList.add("slideNav");
+    const [active, setActive] = useState("home");
+    const [showNav, setShowNav] = useState(false);
+    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 833);
 
-        slideNav.classList.remove("slideNavHidden");
+    useEffect(() => {
+        function handleResize() {
+            setIsDesktop(window.innerWidth >= 833);
+            if (window.innerWidth >= 833) setShowNav(false);
+        }
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    function handleNavClick(section) {
+        setActive(section);
+        setShowNav(false);
     }
 
-    function hideNav() {
-        const slideNav = document.querySelector(".slideNav");
-        slideNav.classList.add("slideNavHidden");
-
-        slideNav.classList.remove("slideNav");
-    }
-
-    function Exit(){
-        hideNav()
-    }
-
-
-    if (window.innerWidth >= 833){
-           return (
-        
-        <>
+    if (isDesktop) {
+        return (
             <div className="nav nav-font">
                 <div className="left"><a href="#">AKSHAT</a></div>
                 <div className="right">
                     <ul>
-                        <li><a href="#home" className="active">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#resume">Resume</a></li>
-                        <li><a href="#skills">Skills</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#home" className={active === "home" ? "active" : ""} onClick={() => handleNavClick("home")}>Home</a></li>
+                        <li><a href="#about" className={active === "about" ? "active" : ""} onClick={() => handleNavClick("about")}>About</a></li>
+                        <li><a href="#resume" className={active === "resume" ? "active" : ""} onClick={() => handleNavClick("resume")}>Resume</a></li>
+                        <li><a href="#skills" className={active === "skills" ? "active" : ""} onClick={() => handleNavClick("skills")}>Skills</a></li>
+                        <li><a href="#projects" className={active === "projects" ? "active" : ""} onClick={() => handleNavClick("projects")}>Projects</a></li>
+                        <li><a href="#contact" className={active === "contact" ? "active" : ""} onClick={() => handleNavClick("contact")}>Contact</a></li>
                     </ul>
                 </div>
             </div>
-        </>
-
-    )
-    }
-    else{
-    return (
-        
-        <>
+        );
+    } else {
+        return (
             <div className="nav nav-font">
                 <div className="left"><a href="#">AKSHAT</a></div>
                 <div className="right">
-                    <i className="fa-solid fa-ellipsis-vertical threedot" onClick={callNav}></i>
-                    <div className="slideNavHidden">
-                        <i className="fa-solid fa-xmark cross" onClick={hideNav}></i>
+                    <i className="fa-solid fa-ellipsis-vertical threedot" onClick={() => setShowNav(true)}></i>
+                    <div className={showNav ? "slideNav" : "slideNavHidden"}>
+                        <i className="fa-solid fa-xmark cross" onClick={() => setShowNav(false)}></i>
                         <ul className="unorderList">
-                            <li><a href="#home" className="active" onClick={Exit}>Home</a></li>
-                            <li><a href="#about" onClick={Exit}>About</a></li>
-                            <li><a href="#resume" onClick={Exit}>Resume</a></li>
-                            <li><a href="#skills" onClick={Exit}>Skills</a></li>
-                            <li><a href="#projects" onClick={Exit}>Projects</a></li>
-                            <li><a href="#contact" onClick={Exit}>Contact</a></li>
+                            <li><a href="#home" className={active === "home" ? "active" : ""} onClick={() => handleNavClick("home")}>Home</a></li>
+                            <li><a href="#about" className={active === "about" ? "active" : ""} onClick={() => handleNavClick("about")}>About</a></li>
+                            <li><a href="#resume" className={active === "resume" ? "active" : ""} onClick={() => handleNavClick("resume")}>Resume</a></li>
+                            <li><a href="#skills" className={active === "skills" ? "active" : ""} onClick={() => handleNavClick("skills")}>Skills</a></li>
+                            <li><a href="#projects" className={active === "projects" ? "active" : ""} onClick={() => handleNavClick("projects")}>Projects</a></li>
+                            <li><a href="#contact" className={active === "contact" ? "active" : ""} onClick={() => handleNavClick("contact")}>Contact</a></li>
                         </ul>
                     </div>
-
                 </div>
             </div>
-        </>
-
-    )
+        );
     }
-
 }
