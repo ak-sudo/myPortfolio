@@ -120,7 +120,8 @@
         display: flex;
         padding: 20px;
         background-color: #000;
-        height: 70vh;
+        min-height:750px;
+        max-height: 750px;
         width: 100dvw;
     }
 
