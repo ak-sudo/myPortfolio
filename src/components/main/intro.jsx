@@ -16,7 +16,7 @@ export default function Intro() {
                         <h2>I'm <span>Akshat Kala</span></h2>
                         <p className="description">a freelancing web developer helping out people round the globe</p>
                         <div className="cta-buttons">
-                            <button>Hire Me</button>
+                            <button><a href="#contact"></a>Hire Me</button>
                             <button><a href="#projects">My Works</a></button>
                         </div>
                     </div>
