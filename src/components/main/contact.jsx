@@ -35,7 +35,13 @@ export default function Contact() {
   const [message, setMessage] = useState();
 
   const handleSubmit = (e) => {
+    function enableBtn(btn){
+      btn.disabled = false;
+    }
+    const contactBtn = document.getElementById("contactBtn");
+    contactBtn.disabled = true;
     e.preventDefault();
+    
     axios
       .post("https://myportfolioo-qxps.onrender.com/contact", { name, email, message })
       .then((result) => {
@@ -43,13 +49,16 @@ export default function Contact() {
           console.log(result.data)
           setInfoState(200); // Success
         } else {
-          setInfoState(404); // Failed
+          setInfoState(500); // Failed
+
         }
         setTimeout(() => setInfoState(0), 5000);
+        enableBtn(contactBtn)
       })
       .catch((err) => {
         setInfoState(err.response?.status || 500); // Failed
         setTimeout(() => setInfoState(0), 5000);
+        enableBtn(contactBtn)
       });
   };
 
